@@ -55,6 +55,7 @@ cask "ngrok"
 
 # Git
 brew "lazygit"
+brew "git-lfs"
 tap "gabrie30/utils"
 brew "gabrie30/utils/ghorg"
 brew "pre-commit"
