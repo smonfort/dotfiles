@@ -105,4 +105,3 @@ cask "obsidian"
 
 # IDE
 brew "neovim"
-cask "visual-studio-code"
