@@ -40,6 +40,7 @@ tap "FairwindsOps/tap"
 brew "FairwindsOps/tap/pluto"
 tap "powershell/tap"
 brew "powershell"
+brew "uplot"
 
 # Some dev stuff
 brew "pnpm"
