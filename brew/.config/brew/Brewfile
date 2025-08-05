@@ -52,6 +52,8 @@ cask "sequel-ace"
 brew "sonar-scanner"
 brew "cloc"
 cask "ngrok"
+cask "mongodb-compass"
+brew "mongosh"
 
 # Git
 brew "lazygit"
