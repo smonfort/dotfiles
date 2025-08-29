@@ -41,6 +41,7 @@ brew "FairwindsOps/tap/pluto"
 tap "powershell/tap"
 brew "powershell"
 brew "youplot"
+brew "awscurl"
 
 # Some dev stuff
 brew "pnpm"
