@@ -30,7 +30,6 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
 				tf = { "terraform_fmt" },
 			},
 		})
