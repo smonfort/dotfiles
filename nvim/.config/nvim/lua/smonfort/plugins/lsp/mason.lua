@@ -41,6 +41,7 @@ return {
 				"prettier",
 				"stylua",
 				"eslint",
+				"eslint_d",
 				"tflint",
 				"tfsec",
 				"mdformat",

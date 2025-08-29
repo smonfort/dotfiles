@@ -19,7 +19,7 @@ return {
 			end,
 			formatters_by_ft = {
 				javascript = { "prettier" },
-				typescript = { "prettier" },
+				typescript = { "prettier", "eslint_d" },
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
 				astro = { "prettier" },
