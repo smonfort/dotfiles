@@ -53,7 +53,7 @@ asdf plugin add terraform > /dev/null 2>&1
 asdf plugin add pulumi > /dev/null 2>&1
 asdf plugin add nodejs > /dev/null 2>&1
 asdf plugin add helm > /dev/null 2>&1
-
+asdf plugin add pnpm > /dev/null 2>&1
 
 # Should be at the end of the file for starship to work
 eval "$(starship init zsh)"
