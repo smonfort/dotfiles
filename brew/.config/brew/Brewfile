@@ -56,6 +56,7 @@ brew "cloc"
 cask "ngrok"
 cask "mongodb-compass"
 brew "mongosh"
+cask "bruno"
 
 # Git
 brew "lazygit"
