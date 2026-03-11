@@ -53,6 +53,7 @@ cask "ngrok"
 cask "mongodb-compass"
 brew "mongosh"
 cask "bruno"
+cask "claude-code"
 
 # Git
 brew "lazygit"
