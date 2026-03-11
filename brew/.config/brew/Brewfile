@@ -1,6 +1,3 @@
-# VPN
-cask "openvpn-connect"
-
 # System
 brew "asdf"
 
