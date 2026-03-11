@@ -32,7 +32,7 @@ alias docker="podman"
 alias g="glab"
 
 # Ensure dependencies are up to date and remove unused ones 
-alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --cleanup && brew upgrade"
+alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --cleanup && brew upgrade && brew upgrade --cask"
 
 # Load secrets if they exist
 [ -f ~/.secrets ] && source ~/.secrets
