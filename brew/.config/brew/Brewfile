@@ -96,6 +96,7 @@ brew "zsh-vi-mode"
 brew "renovate"
 brew "gomplate"
 brew "uv"
+brew "imagemagick"
 
 # Office & Communication
 cask "microsoft-auto-update"
