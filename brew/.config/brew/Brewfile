@@ -62,6 +62,7 @@ tap "gabrie30/utils"
 brew "gabrie30/utils/ghorg"
 brew "pre-commit"
 brew "git-delta"
+brew "gh"
 
 # Browsers
 cask "firefox"
