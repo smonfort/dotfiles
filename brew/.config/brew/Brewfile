@@ -54,6 +54,7 @@ cask "mongodb-compass"
 brew "mongosh"
 cask "bruno"
 cask "claude-code"
+brew "ltex-ls"
 
 # Git
 brew "lazygit"
