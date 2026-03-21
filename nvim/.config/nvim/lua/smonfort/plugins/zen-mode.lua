@@ -1,3 +1,4 @@
+-- 🧘 Distraction-free coding for Neovim
 return {
 	"folke/zen-mode.nvim",
 	dependencies = {
