@@ -14,7 +14,7 @@ return {
 			"ts_ls",
 			"rust_analyzer",
 			"dockerls",
-			"ltex",
+			"ltex_plus",
 		},
 	},
 	dependencies = {
