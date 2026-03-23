@@ -23,9 +23,8 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
 
--- spell check
-opt.spell = true
-opt.spelllang = en_us, fr
+-- spell check disabled (handled by ltex-plus LSP)
+opt.spell = false
 
 -- appearance
 opt.guicursor = {
