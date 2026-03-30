@@ -51,3 +51,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- MDX files use markdown syntax
+vim.filetype.add({ extension = { mdx = "markdown" } })

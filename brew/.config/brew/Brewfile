@@ -55,6 +55,7 @@ brew "mongosh"
 cask "bruno"
 cask "claude-code"
 brew "ltex-ls"
+brew "temporal"
 
 # Git
 brew "lazygit"
@@ -99,6 +100,7 @@ brew "renovate"
 brew "gomplate"
 brew "uv"
 brew "imagemagick"
+brew "dashlane/tap/dashlane-cli"
 
 # Office & Communication
 cask "microsoft-auto-update"
