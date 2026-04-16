@@ -117,4 +117,5 @@ cask "slack"
 cask "obsidian"
 
 # IDE
+brew "tree-sitter-cli"
 brew "neovim"
