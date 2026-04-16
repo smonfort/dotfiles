@@ -2,6 +2,7 @@
 brew "asdf"
 
 # Cloud / Infrastructure 
+brew "vercel-cli"
 brew "pulumi"
 brew "graphviz"
 brew "copier"
