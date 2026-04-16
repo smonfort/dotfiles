@@ -2,6 +2,7 @@
 brew "asdf"
 
 # Cloud / Infrastructure 
+brew "go-task/tap/go-task"
 brew "vercel-cli"
 brew "pulumi"
 brew "graphviz"
