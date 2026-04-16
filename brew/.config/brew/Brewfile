@@ -58,6 +58,8 @@ cask "mongodb-compass"
 brew "mongosh"
 cask "bruno"
 cask "claude-code"
+cask "claude"
+brew "anomalyco/tap/opencode"
 brew "ltex-ls"
 brew "temporal"
 
