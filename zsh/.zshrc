@@ -55,6 +55,8 @@ asdf plugin add nodejs > /dev/null 2>&1
 asdf plugin add helm > /dev/null 2>&1
 asdf plugin add pnpm > /dev/null 2>&1
 
+eval "$(task --completion zsh)"
+
 # Should be at the end of the file for starship to work
 eval "$(starship init zsh)"
 
