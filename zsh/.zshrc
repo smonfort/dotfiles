@@ -30,6 +30,7 @@ alias lg="lazygit"
 alias p="pnpm"
 alias docker="podman"
 alias g="glab"
+alias t="task"
 
 # Ensure dependencies are up to date and remove unused ones 
 alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --cleanup && brew upgrade && brew upgrade --cask"
