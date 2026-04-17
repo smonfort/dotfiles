@@ -2,6 +2,7 @@
 brew "asdf"
 
 # Cloud / Infrastructure 
+brew "dotenvx/brew/dotenvx"
 brew "go-task/tap/go-task"
 brew "vercel-cli"
 brew "pulumi"
@@ -50,6 +51,7 @@ brew "poetry"
 brew "go"
 brew "eslint"
 cask "dbeaver-community"
+brew "postgresql"
 cask "pgadmin4"
 cask "sequel-ace"
 brew "sonar-scanner"
