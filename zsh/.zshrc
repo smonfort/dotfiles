@@ -48,7 +48,9 @@ eval "$(fzf --zsh)"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # Append uv binaries to PATH
 export PATH="$HOME/.local/bin:$PATH"
-
+# Required for psql
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+#
 # Load asdf plugins if they are not already loaded with silent output
 asdf plugin add terraform > /dev/null 2>&1
 asdf plugin add pulumi > /dev/null 2>&1
