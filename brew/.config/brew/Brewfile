@@ -1,5 +1,5 @@
 # System
-brew "asdf"
+brew "mise"
 
 # Cloud / Infrastructure 
 brew "dotenvx/brew/dotenvx"
@@ -122,3 +122,6 @@ cask "obsidian"
 # IDE
 brew "tree-sitter-cli"
 brew "neovim"
+
+# ecommerce
+brew "stripe/stripe-cli/stripe"

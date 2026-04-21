@@ -46,19 +46,13 @@ alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --
 # Enable FZH
 eval "$(fzf --zsh)"
 
-# Append asdf shims to PATH
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# Mise setup
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+
 # Append uv binaries to PATH
 export PATH="$HOME/.local/bin:$PATH"
 # Required for psql
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-#
-# Load asdf plugins if they are not already loaded with silent output
-asdf plugin add terraform > /dev/null 2>&1
-asdf plugin add pulumi > /dev/null 2>&1
-asdf plugin add nodejs > /dev/null 2>&1
-asdf plugin add helm > /dev/null 2>&1
-asdf plugin add pnpm > /dev/null 2>&1
 
 eval "$(task --completion zsh)"
 
@@ -72,3 +66,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+eval "$(mise activate zsh)"
+eval "$(mise activate zsh)"
