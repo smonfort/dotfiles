@@ -32,6 +32,8 @@ alias docker="podman"
 alias g="glab"
 alias t="task"
 
+alias vn='NVIM_APPNAME=nvim-next nvim'
+
 # Ensure dependencies are up to date and remove unused ones 
 alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --cleanup && brew upgrade && brew upgrade --cask"
 
