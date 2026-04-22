@@ -1,7 +1,7 @@
 -- Install plugins using pack
 vim.pack.add({
 	{
-		src = "https://github.com/saghen/blink.cmp",
+		src = gh("saghen/blink.cmp"),
 		version = vim.version.range("^1"),
 	},
 })

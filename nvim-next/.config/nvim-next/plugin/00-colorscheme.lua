@@ -1,5 +1,5 @@
 vim.pack.add({
-	{ src = "https://github.com/folke/tokyonight.nvim" },
+	gh("folke/tokyonight.nvim"),
 })
 
 require("tokyonight").setup({
