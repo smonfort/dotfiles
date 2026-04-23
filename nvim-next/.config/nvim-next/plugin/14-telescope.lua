@@ -1,6 +1,7 @@
 vim.pack.add({
 	gh("nvim-lua/plenary.nvim"),
 	gh("nvim-telescope/telescope.nvim"),
+	gh("nvim-telescope/telescope-ui-select.nvim"),
 })
 
 local telescope = require("telescope")
@@ -18,6 +19,8 @@ telescope.setup({
 		},
 	},
 })
+
+telescope.load_extension("ui-select")
 
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find open buffers" })
