@@ -28,7 +28,7 @@ alias mp="make plan"
 alias ml="make lint"
 alias lg="lazygit"
 alias p="pnpm"
-alias docker="podman"
+# alias docker="podman"
 alias g="glab"
 alias t="task"
 
