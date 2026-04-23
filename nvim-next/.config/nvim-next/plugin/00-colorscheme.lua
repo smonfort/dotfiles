@@ -3,6 +3,6 @@ vim.pack.add({
 })
 
 require("tokyonight").setup({
-	style = night,
+	style = "night",
 })
 vim.cmd([[colorscheme tokyonight]])
