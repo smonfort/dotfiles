@@ -46,6 +46,10 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
     "telescope-fzf-native.nvim": {
       "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
       "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"

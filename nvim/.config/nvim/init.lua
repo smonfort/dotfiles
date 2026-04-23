@@ -1,2 +1,4 @@
-require("smonfort.core")
-require("smonfort.lazy")
+require("functions")
+require("options")
+require("keymaps")
+require("lsp")
