@@ -46,9 +46,6 @@ alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --
 # Enable FZH
 eval "$(fzf --zsh)"
 
-# Mise setup
-echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
-
 # Append uv binaries to PATH
 export PATH="$HOME/.local/bin:$PATH"
 # Required for psql
@@ -66,5 +63,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-eval "$(mise activate zsh)"
+
 eval "$(mise activate zsh)"
