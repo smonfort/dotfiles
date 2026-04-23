@@ -1,7 +1,7 @@
 vim.pack.add({
 	gh("mason-org/mason.nvim"),
 	gh("mason-org/mason-lspconfig.nvim"),
-	gh("https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"),
+	gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
 })
 
 require("mason").setup({})
