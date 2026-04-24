@@ -60,9 +60,6 @@ cask "ngrok"
 cask "mongodb-compass"
 brew "mongosh"
 cask "bruno"
-cask "claude-code"
-cask "claude"
-brew "anomalyco/tap/opencode"
 brew "ltex-ls"
 brew "temporal"
 
@@ -125,3 +122,9 @@ brew "neovim"
 
 # ecommerce
 brew "stripe/stripe-cli/stripe"
+
+# AI
+brew "rtk"
+cask "claude-code"
+cask "claude"
+brew "anomalyco/tap/opencode"
