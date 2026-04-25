@@ -52,17 +52,13 @@ Running the `bbic` command on a regular basis ensures that your configuration is
 
 ### Neovim
 
-My very personal [neovim](https://neovim.io/) configuration is included in this repository. Major plugins are :
+My very personal [neovim](https://neovim.io/) configuration is included in this repository. Plugins are installed using standard `vim.pack`.
 
-- [Lazy](https://github.com/folke/lazy.nvim) to manage neovim plugins
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim) to navigate through files and git repositories using fuzzy search
-- [Mason](https://github.com/williamboman/mason.nvim) to manage LSP servers
-- [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) to parse and highlight syntax
-- [GitHub Copilot](https://github.com/github/copilot.vim) plugin to provide AI-powered code suggestions
+- [Mason](https://github.com/williamboman/mason.nvim) to manage LSP servers installation
 - [conform](https://github.com/stevearc/conform.nvim) and [nvim-lint](https://github.com/mfussenegger/nvim-lint) to format and lint code
 - [trouble](https://github.com/folke/trouble.nvim) and [todo-comments](https://github.com/folke/todo-comments.nvim) to manage code issues and todos
 - [which-key](https://github.com/liuchengxu/vim-which-key) to display keybindings in a fancy popup
-- [floaterm](https://github.com/voldikss/vim-floaterm) to provide a floating terminal window within neovim for quick commands
 - [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) as a file explorer
 
 I prefered a personal setup over a pre-configured distribution such as [LazyVim](https://www.lazyvim.org/). It forced me to have a better understanding of the plugins I use and to configure them to fit my needs.
