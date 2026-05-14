@@ -124,6 +124,7 @@ brew "neovim"
 brew "stripe/stripe-cli/stripe"
 
 # AI
+brew "ollama"
 brew "rtk"
 cask "claude-code"
 cask "claude"
