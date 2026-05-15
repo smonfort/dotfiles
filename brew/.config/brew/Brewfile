@@ -75,6 +75,7 @@ brew "gh"
 # Browsers
 cask "firefox"
 cask "brave-browser"
+cask "google-chrome"
 
 # Fancy terminal utils
 cask "wezterm"
