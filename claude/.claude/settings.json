@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": false,
+    "vercel@claude-plugins-official": false,
+    "mcp-server-dev@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/smonfort/.claude/statusline-command.sh"
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--browserUrl=http://127.0.0.1:9222",
+        "--userDataDir=/Users/smonfort/chrome-debug-profile",
+        "--chromeArg=--remote-debugging-port=9222"
+      ]
+    }
+  }
+}
