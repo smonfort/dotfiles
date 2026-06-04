@@ -124,6 +124,9 @@ brew "neovim"
 # ecommerce
 brew "stripe/stripe-cli/stripe"
 
+# Video
+brew "ffmpeg"
+
 # AI
 brew "ollama"
 brew "rtk"
