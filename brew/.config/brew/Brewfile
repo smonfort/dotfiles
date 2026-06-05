@@ -125,7 +125,8 @@ brew "neovim"
 brew "stripe/stripe-cli/stripe"
 
 # Video
-brew "ffmpeg"
+brew "ffmpeg-full"
+cask "vlc"
 
 # AI
 brew "ollama"
