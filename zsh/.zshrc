@@ -68,3 +68,5 @@ esac
 # pnpm end
 
 eval "$(mise activate zsh)"
+export PATH="/opt/homebrew/opt/ffmpeg-full/bin:$PATH"
+
