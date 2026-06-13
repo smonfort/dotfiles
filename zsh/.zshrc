@@ -15,7 +15,7 @@ plugins=(git dotenv zsh-autosuggestions zsh-syntax-highlighting mise)
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Custom aliases
-alias m="make"
+alias m="mise"
 alias v="nvim"
 alias vim="nvim"
 alias vi="nvim"
@@ -23,9 +23,6 @@ alias nv="nvim"
 alias tm="tmuxinator"
 alias tf="terraform"
 alias vl="vault login -method=oidc"
-alias ma="make apply"
-alias mp="make plan"
-alias ml="make lint"
 alias lg="lazygit"
 alias p="pnpm"
 # alias docker="podman"
@@ -67,6 +64,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(mise activate zsh)"
 export PATH="/opt/homebrew/opt/ffmpeg-full/bin:$PATH"
-
+eval "$(mise activate zsh)"
