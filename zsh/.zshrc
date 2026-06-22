@@ -31,8 +31,17 @@ alias t="task"
 
 alias vn='NVIM_APPNAME=nvim-next nvim'
 
-# Ensure dependencies are up to date and remove unused ones 
-alias bbic="brew update && brew bundle install --file ~/.config/brew/Brewfile --force-cleanup --jobs auto && brew upgrade -y && brew upgrade --cask -y"
+# Ensure dependencies are up to date and remove unused ones
+bbic() {
+  brew update
+  local tmpfile
+  tmpfile=$(mktemp)
+  cat ~/.config/brew/Brewfile* > "$tmpfile"
+  brew bundle install --file "$tmpfile" --force-cleanup --jobs auto
+  rm -f "$tmpfile"
+  brew upgrade -y
+  brew upgrade --cask -y
+}
 
 # Run chrome for MCP
 alias chrome-debug='open -a "Google Chrome" --args --remote-debugging-port=9222 --user-data-dir="$HOME/chrome-debug-profile"'
