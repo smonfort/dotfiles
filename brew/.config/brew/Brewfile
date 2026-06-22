@@ -8,10 +8,8 @@ brew "vercel-cli"
 brew "pulumi"
 brew "graphviz"
 brew "copier"
-brew "glab"
 brew "awscli"
 cask "session-manager-plugin"
-brew "azure-cli"
 brew "cli53"
 brew "helm"
 tap "norwoodj/tap"
@@ -49,11 +47,8 @@ cask "sequel-ace"
 brew "sonar-scanner"
 brew "cloc"
 cask "ngrok"
-cask "mongodb-compass"
-brew "mongosh"
 cask "bruno"
 brew "ltex-ls"
-brew "temporal"
 
 # Git
 brew "lazygit"
@@ -95,16 +90,11 @@ brew "starship"
 tap "shshemi/homebrew-tabiew"
 brew "tabiew"
 brew "zsh-vi-mode"
-brew "renovate"
 brew "gomplate"
 brew "uv"
 brew "imagemagick"
-brew "dashlane/tap/dashlane-cli", trusted: true
 
 # Office & Communication
-cask "microsoft-auto-update"
-cask "microsoft-office"
-cask "microsoft-teams"
 cask "notion"
 cask "slack"
 cask "obsidian"
@@ -113,11 +103,7 @@ cask "obsidian"
 brew "tree-sitter-cli"
 brew "neovim"
 
-# ecommerce
-brew "stripe/stripe-cli/stripe", trusted: true
-
 # Video
-brew "ffmpeg-full"
 cask "vlc"
 
 # AI
@@ -125,4 +111,4 @@ brew "ollama"
 brew "rtk"
 cask "claude-code"
 cask "claude"
-brew "anomalyco/tap/opencode"
+brew "opencode"
