@@ -4,7 +4,6 @@ brew "mise"
 # Cloud / Infrastructure 
 brew "dotenvx/brew/dotenvx", trusted: true
 brew "go-task/tap/go-task", trusted: true
-brew "vercel-cli"
 brew "pulumi"
 brew "graphviz"
 brew "copier"
@@ -40,7 +39,6 @@ brew "go"
 brew "eslint"
 cask "dbeaver-community"
 brew "libpq"
-cask "pgadmin4"
 cask "sequel-ace"
 brew "sonar-scanner"
 brew "cloc"
@@ -101,12 +99,6 @@ cask "obsidian"
 brew "tree-sitter-cli"
 brew "neovim"
 
-# Video
-cask "vlc"
-
 # AI
-brew "ollama"
-brew "rtk"
 cask "claude-code"
 cask "claude"
-brew "opencode"
