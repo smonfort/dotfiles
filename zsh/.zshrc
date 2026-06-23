@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dotenv zsh-autosuggestions zsh-syntax-highlighting mise)
+plugins=(git dotenv zsh-autosuggestions zsh-syntax-highlighting mise ssh-agent)
 
 # Load zsh-vi-mode
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
