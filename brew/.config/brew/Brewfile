@@ -61,6 +61,7 @@ cask "brave-browser"
 cask "google-chrome"
 
 # Fancy terminal utils
+cask "font-jetbrains-mono-nerd-font"
 cask "wezterm"
 brew "bat"
 brew "tmux"
