@@ -13,8 +13,8 @@ command -v jq >/dev/null 2>&1 && SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.ses
 STATE_DIR="$HOME/.cache/claude-sessions"
 mkdir -p "$STATE_DIR" 2>/dev/null
 
-IFS=$'\t' read -r TMUX_SESSION TMUX_WINDOW WINDOW_NAME CWD <<EOF
-$(tmux display-message -p -t "${TMUX_PANE:-}" $'#{session_name}\t#{window_index}\t#{window_name}\t#{pane_current_path}' 2>/dev/null)
+IFS=$'\t' read -r TMUX_SESSION TMUX_WINDOW PANE_ID WINDOW_NAME CWD <<EOF
+$(tmux display-message -p -t "${TMUX_PANE:-}" $'#{session_name}\t#{window_index}\t#{pane_id}\t#{window_name}\t#{pane_current_path}' 2>/dev/null)
 EOF
 
 [ -z "$TMUX_SESSION" ] && exit 0
@@ -22,6 +22,7 @@ EOF
 {
   echo "tmux_session=$TMUX_SESSION"
   echo "tmux_window=$TMUX_WINDOW"
+  echo "tmux_pane=$PANE_ID"
   echo "window_name=$WINDOW_NAME"
   echo "cwd=$CWD"
   echo "started=$(date -Iseconds)"

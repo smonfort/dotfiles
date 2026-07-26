@@ -1,8 +1,9 @@
 #!/bin/bash
 # Claude Code "Notification"/"Stop" hook: fires on permission prompts,
-# idle-wait, and end-of-turn. Sends a macOS notification and records the
-# triggering tmux session so the `prefix + a` binding in
-# dotfiles/tmux/.tmux.conf can jump back to it.
+# idle-wait, and end-of-turn. Sends a macOS notification and marks the
+# session's entry in ~/.cache/claude-sessions/ (written by
+# register-tmux-session.sh) as notified, so the `prefix + a` binding in
+# dotfiles/tmux/.tmux.conf can jump back to it and `prefix + q` can badge it.
 # Exit codes are ignored by Claude Code for this hook, but every step still
 # degrades gracefully to avoid noisy "hook error" notices.
 #
@@ -16,12 +17,14 @@ KIND="${1:-}"
 INPUT=$(cat)
 
 MESSAGE=""
+SESSION_ID=""
 if command -v jq >/dev/null 2>&1; then
   if [ "$KIND" = "done" ]; then
     MESSAGE=$(printf '%s' "$INPUT" | jq -r '.last_assistant_message // empty' 2>/dev/null)
   else
     MESSAGE=$(printf '%s' "$INPUT" | jq -r '.message // empty' 2>/dev/null)
   fi
+  SESSION_ID=$(printf '%s' "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 fi
 
 if [ "$KIND" = "done" ] && [ -n "$MESSAGE" ]; then
@@ -43,10 +46,28 @@ EOF
   fi
 fi
 
-if [ -n "$SESSION" ]; then
-  STATE_DIR="$HOME/.cache/claude-notify"
-  mkdir -p "$STATE_DIR" 2>/dev/null
-  printf '%s\n%s\n' "$SESSION" "${TMUX_PANE:-}" > "$STATE_DIR/last-target" 2>/dev/null
+if [ -n "$SESSION_ID" ]; then
+  STATE_DIR="$HOME/.cache/claude-sessions"
+  SESSION_FILE="$STATE_DIR/$SESSION_ID"
+  NOTIFIED_AT=$(date +%s)
+  if [ -f "$SESSION_FILE" ]; then
+    {
+      echo "notified=1"
+      echo "notified_kind=$KIND"
+      echo "notified_at=$NOTIFIED_AT"
+    } >> "$SESSION_FILE" 2>/dev/null
+  elif [ -n "$SESSION" ]; then
+    # Registry entry missing (e.g. SessionStart hook never ran) — create a
+    # minimal fallback so the notification isn't silently lost.
+    mkdir -p "$STATE_DIR" 2>/dev/null
+    {
+      echo "tmux_session=$SESSION"
+      echo "tmux_pane=${TMUX_PANE:-}"
+      echo "notified=1"
+      echo "notified_kind=$KIND"
+      echo "notified_at=$NOTIFIED_AT"
+    } > "$SESSION_FILE" 2>/dev/null
+  fi
 fi
 
 ICON=""
