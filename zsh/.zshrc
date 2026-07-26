@@ -1,6 +1,9 @@
 # Use linux like config folder
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# French date/time formatting (used by tmux status bar strftime)
+export LC_TIME="fr_FR.UTF-8"
+
 # Set neovim as the default editor
 export EDITOR='vim'
 
