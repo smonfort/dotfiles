@@ -1,9 +1,10 @@
 #!/bin/bash
 # Claude Code "Notification"/"Stop" hook: fires on permission prompts,
-# idle-wait, and end-of-turn. Sends a macOS notification and marks the
-# session's entry in ~/.cache/claude-sessions/ (written by
-# register-tmux-session.sh) as notified, so the `prefix + a` binding in
-# dotfiles/tmux/.tmux.conf can jump back to it and `prefix + q` can badge it.
+# idle-wait, and end-of-turn. Sends a macOS notification via alerter
+# (https://github.com/vjeantet/alerter) and marks the session's entry in
+# ~/.cache/claude-sessions/ (written by register-tmux-session.sh) as
+# notified, so the `prefix + a` binding in dotfiles/tmux/.tmux.conf can jump
+# back to it and `prefix + q` can badge it.
 # Exit codes are ignored by Claude Code for this hook, but every step still
 # degrades gracefully to avoid noisy "hook error" notices.
 #
@@ -87,6 +88,17 @@ SAFE_TITLE=$(escape "$TITLE")
 SAFE_BODY=$(escape "$BODY")
 
 if [ "$IS_ACTIVE" != "1" ]; then
-  osascript -e "display notification \"$SAFE_BODY\" with title \"$SAFE_TITLE\"" >/dev/null 2>&1
+  if command -v alerter >/dev/null 2>&1 && [ -n "$SESSION_ID" ]; then
+    # alerter blocks until the notification is dismissed/clicked (unlike
+    # terminal-notifier's fire-and-forget -execute), so run it detached and
+    # act on its stdout ("@CONTENTCLICKED" on click) once it returns.
+    (
+      ANSWER=$(alerter --title "$SAFE_TITLE" --message "$SAFE_BODY" 2>/dev/null)
+      [ "$ANSWER" = "@CONTENTCLICKED" ] && "$HOME/.claude/notify-click.sh" "$SESSION_ID"
+    ) >/dev/null 2>&1 &
+    disown 2>/dev/null || true
+  else
+    osascript -e "display notification \"$SAFE_BODY\" with title \"$SAFE_TITLE\"" >/dev/null 2>&1
+  fi
 fi
 exit 0

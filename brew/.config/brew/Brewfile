@@ -61,6 +61,8 @@ cask "brave-browser"
 cask "google-chrome"
 
 # Fancy terminal utils
+tap "vjeantet/tap", trusted: true
+brew "vjeantet/tap/alerter"
 cask "font-jetbrains-mono-nerd-font"
 cask "wezterm"
 brew "bat"
