@@ -13,6 +13,7 @@ case "$1" in
   ruby|irb)              echo -n $'' ;;
   docker|docker-compose) echo -n $'' ;;
   lua)                   echo -n $'' ;;
+  zsh)                   echo -n $'' ;;
   claude)                echo -n $'' ;;
   *)                     echo -n $'' ;;
 esac
