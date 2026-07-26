@@ -102,3 +102,7 @@ brew "neovim"
 # AI
 cask "claude-code"
 cask "claude"
+
+# Secrets
+cask "1password"
+cask "1password-cli"
