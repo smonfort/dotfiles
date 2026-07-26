@@ -33,6 +33,6 @@ for f in "$STATE_DIR"/*; do
     "$tmux_session" "$tmux_window" "$BADGE" "$tmux_session" "$window_name" "${cwd/#$HOME/~}"
 done \
   | sort -u -t$'\t' -k2 \
-  | fzf-tmux -p --reverse --no-info --border-label ' 🤖 Switch to Claude window ' --with-nth=2 \
+  | fzf-tmux -p --reverse --no-info --border-label ' 🤖 Switch to Claude window ' --delimiter=$'\t' --with-nth=2 \
   | cut -f1 \
   | xargs -I{} tmux switch-client -t "{}" \; select-window -t "{}"
