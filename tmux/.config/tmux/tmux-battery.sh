@@ -4,7 +4,7 @@ percent=$(echo "$battery_info" | egrep -Eo '\d+%' | head -1 | tr -d '%')
 charging_indicator=$(echo "$battery_info" | grep -q discharging && echo "🔋" || echo "⚡")
 
 if [ "$percent" -gt 75 ]; then
-    color="green"
+    color="#9ece6a"
 elif [ "$percent" -ge 50 ]; then
     color="yellow"
 elif [ "$percent" -ge 25 ]; then
