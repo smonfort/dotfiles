@@ -15,6 +15,8 @@
 
 KIND="${1:-}"
 
+NOTIFICATION_ICON_URL='https://imgs.search.brave.com/XyGLUOyaL6Bt5oPFQl368eQw65I_BBf8TQppRDECrCk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL3RodW1icy82/NmFmOTk4MzllNTVm/MWVlMjlmMTE3YWMu/cG5n'
+
 INPUT=$(cat)
 
 MESSAGE=""
@@ -93,7 +95,7 @@ if [ "$IS_ACTIVE" != "1" ]; then
     # terminal-notifier's fire-and-forget -execute), so run it detached and
     # act on its stdout ("@CONTENTCLICKED" on click) once it returns.
     (
-      ANSWER=$(alerter --title "$SAFE_TITLE" --message "$SAFE_BODY" 2>/dev/null)
+      ANSWER=$(alerter --title "$SAFE_TITLE" --message "$SAFE_BODY" --app-icon "$NOTIFICATION_ICON_URL" 2>/dev/null)
       [ "$ANSWER" = "@CONTENTCLICKED" ] && "$HOME/.claude/notify-click.sh" "$SESSION_ID"
     ) >/dev/null 2>&1 &
     disown 2>/dev/null || true
