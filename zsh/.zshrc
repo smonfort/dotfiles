@@ -31,8 +31,7 @@ alias p="pnpm"
 # alias docker="podman"
 alias g="glab"
 alias t="task"
-
-alias vn='NVIM_APPNAME=nvim-next nvim'
+alias cc="claude"
 
 # Ensure dependencies are up to date and remove unused ones
 bbic() {
