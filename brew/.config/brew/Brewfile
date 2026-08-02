@@ -113,4 +113,4 @@ cask "1password-cli"
 # Tilling
 cask "nikitabobko/tap/aerospace", trusted: true
 brew "magicmark/tap/spacelist", trusted: true
-cask "karabiner-elements", trusted: true
+cask "hyperkey", trusted: true
