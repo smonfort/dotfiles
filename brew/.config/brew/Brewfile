@@ -109,3 +109,6 @@ cask "claude"
 # Secrets
 cask "1password"
 cask "1password-cli"
+
+# Tilling
+cask "nikitabobko/tap/aerospace", trusted: true
