@@ -3,6 +3,12 @@
 
 input=$(cat)
 
+# --- Sandbox badge (sbx sets IS_SANDBOX inside the container) ---
+sandbox_badge=""
+if [ -n "${IS_SANDBOX:-}" ]; then
+  sandbox_badge=$(printf '\033[1;97;41m SBX \033[0m ')
+fi
+
 # Build a progress bar: make_bar <pct_int> <width>
 make_bar() {
   local pct=$1 width=${2:-10}
@@ -26,8 +32,7 @@ make_bar() {
 # --- Shell prompt segment (dir + git branch) ---
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // empty')
 [ -z "$cwd" ] && cwd=$(pwd)
-home="$HOME"
-short_cwd="${cwd/#$home/~}"
+short_cwd=$(basename "$cwd")
 
 git_branch=$(git -C "$cwd" -c gc.auto=0 symbolic-ref --short HEAD 2>/dev/null)
 
@@ -90,6 +95,7 @@ else
 fi
 
 # --- Output ---
+printf '%s' "$sandbox_badge"
 printf '%s' "$prompt_line"
 printf '  |  %s' "$ctx_line"
 [ -n "$session_line" ] && printf '  |  %s' "$session_line"
