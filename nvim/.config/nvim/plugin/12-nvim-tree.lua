@@ -5,6 +5,9 @@ vim.pack.add({
 })
 
 require("nvim-tree").setup({
+	filters = {
+		custom = { "^.git$" },
+	},
 	view = {
 		float = {
 			enable = true,
