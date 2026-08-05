@@ -8,6 +8,11 @@ require("nvim-tree").setup({
 	filters = {
 		custom = { "^.git$" },
 	},
+	renderer = {
+		indent_markers = {
+			enable = true,
+		},
+	},
 	view = {
 		float = {
 			enable = true,
@@ -35,5 +40,10 @@ require("nvim-tree").setup({
 		end,
 	},
 })
+
+-- NvimTreeSignColumn links to NvimTreeNormal (sidebar bg), not NvimTreeNormalFloat,
+-- which leaves the sign column grey even though the rest of the float is black.
+vim.api.nvim_set_hl(0, "NvimTreeNormal", { link = "NvimTreeNormalFloat" })
+vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormalFloat" })
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
