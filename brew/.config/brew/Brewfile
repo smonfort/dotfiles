@@ -1,5 +1,6 @@
 # System
 brew "mise"
+brew "coreutils"
 
 # Cloud / Infrastructure 
 brew "dotenvx/brew/dotenvx", trusted: true
