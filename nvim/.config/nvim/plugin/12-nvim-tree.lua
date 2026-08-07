@@ -32,6 +32,8 @@ require("nvim-tree").setup({
 					col = center_x,
 					width = window_w_int,
 					height = window_h_int,
+					title = " Explorer ",
+					title_pos = "center",
 				}
 			end,
 		},
