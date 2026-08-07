@@ -17,4 +17,11 @@ require("bufferlist").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>b", "<cmd>BufferList<CR>", { desc = "Open bufferlist" })
+-- Bufferlist draws the buffer numbers via the native number column, styled by LineNr.
+-- Scope a bolder highlight to just this window so it doesn't affect LineNr elsewhere.
+vim.api.nvim_set_hl(0, "BufferListLineNr", { fg = "#ff9e64", bold = true })
+
+vim.keymap.set("n", "<leader>b", function()
+	vim.cmd("BufferList")
+	vim.wo[0].winhighlight = "LineNr:BufferListLineNr"
+end, { desc = "Open bufferlist" })
