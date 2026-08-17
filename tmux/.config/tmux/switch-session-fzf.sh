@@ -16,7 +16,8 @@ selection=$(
     [ -n "$closed_projects" ] && printf '%s\n' "$closed_projects" | sed 's/^/○ /'
   } | fzf-tmux -p --reverse --no-info \
       --pointer=' ' \
-      --border-label ' 😍 Switch tmux session '
+      --border-label ' Switch tmux session ' \
+      --color='label:#27a1b9,border:#27a1b9,bg+:#27a1b9,fg+:white,hl+:white,gutter:black'
 )
 
 [ -z "$selection" ] && exit 0
