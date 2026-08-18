@@ -4,7 +4,6 @@ brew "coreutils"
 
 # Cloud / Infrastructure 
 brew "dotenvx/brew/dotenvx", trusted: true
-brew "go-task/tap/go-task", trusted: true
 brew "pulumi"
 brew "graphviz"
 brew "copier"
