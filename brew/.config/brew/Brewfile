@@ -93,6 +93,7 @@ brew "zsh-vi-mode"
 brew "gomplate"
 brew "uv"
 brew "imagemagick"
+brew "parallel"
 
 # Office & Communication
 cask "notion"
