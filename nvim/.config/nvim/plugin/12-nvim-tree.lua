@@ -4,7 +4,14 @@ vim.pack.add({
 	gh("nvim-tree/nvim-tree.lua"),
 })
 
+local function on_attach(bufnr)
+	local api = require("nvim-tree.api")
+	api.config.mappings.default_on_attach(bufnr)
+	vim.keymap.set("n", "<Esc>", api.tree.close, { buffer = bufnr, desc = "Close" })
+end
+
 require("nvim-tree").setup({
+	on_attach = on_attach,
 	filters = {
 		custom = { "^.git$" },
 	},
