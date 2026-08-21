@@ -14,4 +14,6 @@ vim.pack.add({
 	gh("iamcco/markdown-preview.nvim"),
 })
 
+vim.g.mkdp_browser = "firefox"
+
 vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle markdown preview" })
