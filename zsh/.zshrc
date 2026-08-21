@@ -30,7 +30,6 @@ alias lg="lazygit"
 alias p="pnpm"
 # alias docker="podman"
 alias g="glab"
-alias t="task"
 alias cc="claude"
 
 # Ensure dependencies are up to date and remove unused ones
@@ -61,8 +60,6 @@ eval "$(fzf --zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 # Required for psql
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
-eval "$(task --completion zsh)"
 
 # Should be at the end of the file for starship to work
 eval "$(starship init zsh)"
