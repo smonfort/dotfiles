@@ -115,3 +115,5 @@ cask "1password-cli"
 cask "nikitabobko/tap/aerospace", trusted: true
 brew "magicmark/tap/spacelist", trusted: true
 cask "hyperkey", trusted: true
+tap "FelixKratz/formulae", trusted: true
+brew "borders"
