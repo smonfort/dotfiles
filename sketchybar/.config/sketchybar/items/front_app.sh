@@ -6,7 +6,7 @@ sketchybar --add item front_app left \
            --set front_app       width=180 \
                                  scroll_texts=on \
                                  background.color=$BAR_COLOR \
-                                 icon.color=$ACCENT_COLOR \
+                                 icon.color=$WHITE \
                                  icon.font="sketchybar-app-font:Regular:14.0" \
                                  icon.y_offset=-2 \
                                  label.color=$ACCENT_COLOR \
