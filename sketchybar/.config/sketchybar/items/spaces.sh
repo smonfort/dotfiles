@@ -8,8 +8,10 @@ add_space() {
         --subscribe space.$sid aerospace_workspace_change front_app_switched \
         --set space.$sid \
         icon="$sid" \
-        icon.font="Noteworthy:Bold:11.0" \
+        icon.font="Marker Felt:Wide:14.0" \
+        icon.y_offset=-1 \
         label.font="sketchybar-app-font:Regular:14.0" \
+        label.padding_left=6 \
         label.y_offset=-2 \
         update_freq=2 \
         click_script="aerospace workspace $sid" \
