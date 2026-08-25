@@ -31,6 +31,7 @@ alias p="pnpm"
 # alias docker="podman"
 alias g="glab"
 alias cc="claude"
+alias rsa="brew services restart sketchybar && killall AeroSpace && sleep 2 && open -a AeroSpace"
 
 # Ensure dependencies are up to date and remove unused ones
 bbic() {

@@ -49,6 +49,11 @@ automatically-unhide-macos-hidden-apps = false
 # See: https://nikitabobko.github.io/AeroSpace/commands#mod
 on-mode-changed = []
 
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
 focus-follows-mouse.enabled = false
 
 # Possible values: (qwerty|dvorak|colemak)
@@ -79,7 +84,12 @@ gaps.inner.horizontal = 8
 gaps.inner.vertical =   8
 gaps.outer.left =       8
 gaps.outer.bottom =     8
-gaps.outer.top =        8
+
+gaps.outer.top = [
+  { monitor.secondary = 40 },
+  { monitor.main = 8 },
+  8
+]
 gaps.outer.right =      8
 
 
