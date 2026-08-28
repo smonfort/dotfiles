@@ -119,4 +119,4 @@ tap "FelixKratz/formulae", trusted: true
 brew "borders"
 brew "sketchybar"
 cask "font-sketchybar-app-font"
-
+cask "vicinae"
