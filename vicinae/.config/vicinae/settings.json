@@ -20,5 +20,11 @@
       "dark": {
          "name": "tokyo-night-storm"
       }
+   },
+   "launcher_window": {
+      "size": {
+         "width": 1000,
+         "height": 622
+      }
    }
 }
