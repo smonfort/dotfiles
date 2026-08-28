@@ -39,7 +39,7 @@ bbic() {
   local tmpfile
   tmpfile=$(mktemp)
   cat ~/.config/brew/Brewfile* > "$tmpfile"
-  brew bundle install --file "$tmpfile" --force-cleanup --jobs auto
+  brew bundle install --file "$tmpfile" --force-cleanup
   rm -f "$tmpfile"
   brew upgrade -y
   brew upgrade --cask -y
