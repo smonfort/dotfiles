@@ -218,3 +218,9 @@ gaps.outer.right =      8
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-cmd-l = ['join-with right', 'mode main']
+
+# The Touch ID / quick-access popup (bare "1Password" title) should stay floating
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+if.window-title-regex-substring = '^1Password$'
+run = ['layout floating']
