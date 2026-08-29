@@ -2,6 +2,7 @@
 
 source "$CONFIG_DIR/variables.sh"
 source "$CONFIG_DIR/plugins/icon_map.sh"
+source "$CONFIG_DIR/plugins/icon_overrides.sh"
 
 SID="$1"
 
@@ -17,7 +18,7 @@ APPS=$(aerospace list-windows --workspace "$SID" --format "%{app-name}" 2>/dev/n
 ICONS=""
 while IFS= read -r app; do
     [ -z "$app" ] && continue
-    __icon_map "$app"
+    resolve_icon "$app"
     ICONS+="$icon_result "
 done <<< "$APPS"
 
