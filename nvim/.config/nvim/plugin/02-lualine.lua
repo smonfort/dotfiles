@@ -11,6 +11,24 @@ vim.opt.showmode = false -- lualine already shows the mode, avoid the duplicate 
 local tokyonight_theme = require("lualine.themes._tokyonight").get()
 local colors = require("tokyonight.colors").setup()
 
+-- The theme's "c" sections (and inactive's "a"/"b") paint a solid
+-- bg_statusline background that fills the whole bar, clashing with the
+-- transparent colorscheme (00-colorscheme.lua). Only the mode pill (styled
+-- via "a") should keep its own background; everything else goes transparent.
+for _, mode in pairs(tokyonight_theme) do
+	if mode.c then
+		mode.c.bg = "none"
+	end
+end
+if tokyonight_theme.inactive then
+	if tokyonight_theme.inactive.a then
+		tokyonight_theme.inactive.a.bg = "none"
+	end
+	if tokyonight_theme.inactive.b then
+		tokyonight_theme.inactive.b.bg = "none"
+	end
+end
+
 -- section_separators chains the same round cap between every section, which draws
 -- overlapping half-circles instead of a clean pill. Only "mode" should look like a
 -- pill (matching the tmux status bar); other sections stay flat text.
@@ -26,7 +44,7 @@ end
 -- in (see branch's per-mode quirk noted elsewhere).
 local branch_component = {
 	"branch",
-	color = { fg = colors.cyan, bg = colors.bg_statusline, gui = "bold" },
+	color = { fg = colors.cyan, bg = "none", gui = "bold" },
 	padding = { left = 0, right = 1 },
 	cond = has_filename,
 }
@@ -62,7 +80,7 @@ local buffer_count = {
 	function()
 		return "≡ " .. listed_buffer_count()
 	end,
-	color = { fg = colors.fg_dark, bg = colors.bg_statusline },
+	color = { fg = colors.fg_dark, bg = "none" },
 	cond = function()
 		return listed_buffer_count() > 1
 	end,
