@@ -1,6 +1,7 @@
 # System
 brew "mise"
 brew "coreutils"
+brew "btop"
 
 # Cloud / Infrastructure 
 brew "dotenvx/brew/dotenvx", trusted: true
