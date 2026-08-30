@@ -30,7 +30,7 @@ fi
 if [ "$SID" = "$(aerospace list-workspaces --focused)" ]; then
     sketchybar --set "$NAME" \
         drawing=on \
-        background.color=$MUTED_ORANGE \
+        background.color=$ACCENT_COLOR \
         icon.color=$BAR_COLOR \
         label.color=$BAR_COLOR \
         label="$ICONS"

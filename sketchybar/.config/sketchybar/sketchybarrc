@@ -32,7 +32,6 @@ sketchybar --default "${default[@]}"
 
 ##### Adding Left Items #####
 
-source $ITEM_DIR/front_app.sh
 source $ITEM_DIR/spaces.sh
 
 ##### Adding Right Items #####
