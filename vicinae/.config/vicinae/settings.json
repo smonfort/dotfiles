@@ -7,21 +7,24 @@
 // If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
 //
 // Learn more about configuration at https://docs.vicinae.com/config
+
 {
-  "$schema": "https://vicinae.com/schemas/config.json",
-  "imports": [
-    "public.json",
-    "private.json"
-  ],
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "imports": [
+      "public.json",
+      "private.json"
+   ],
    "global_shortcuts": {
       "toggle": "super+control+alt+shift+SPACE"
    },
    "theme": {
       "dark": {
-         "name": "tokyo-night-storm"
+         "name": "tokyonight-night"
       }
    },
    "launcher_window": {
+      "opacity": 0.9,
+      "material": "none",
       "size": {
          "width": 1000,
          "height": 622

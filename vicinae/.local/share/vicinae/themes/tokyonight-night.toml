@@ -1,0 +1,82 @@
+# TokyoNight Night — matches nvim (tokyonight.nvim, style="night"),
+# tmux (color141/color111/color60) and aerospace's overall dark/cool palette.
+# Palette values are pulled 1:1 from tokyonight.nvim's night colorscheme.
+
+[meta]
+name = "TokyoNight Night"
+description = "Custom theme matching my nvim/tmux/aerospace tokyonight setup"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.core]
+accent = "#bb9af7"
+accent_foreground = "#0c0e14"
+background = "#000000"
+foreground = "#c0caf5"
+secondary_background = "#0d0d0d"
+border = "#3b4261"
+
+[colors.main_window]
+border = "#3b4261"
+footer = { background = "colors.core.secondary_background" }
+
+[colors.settings_window]
+border = "#3b4261"
+
+[colors.accents]
+blue = "#7aa2f7"
+green = "#9ece6a"
+magenta = "#bb9af7"
+orange = "#ff9e64"
+red = "#f7768e"
+yellow = "#e0af68"
+cyan = "#7dcfff"
+purple = "#9d7cd8"
+
+[colors.shortcut]
+border = "colors.core.border"
+
+[colors.text]
+default = "colors.core.foreground"
+muted = "#565f89"
+danger = "#f7768e"
+success = "#9ece6a"
+placeholder = "#545c7e"
+selection = { background = "#bb9af7", foreground = "#0c0e14" }
+
+[colors.text.links]
+default = "#7aa2f7"
+visited = "#9d7cd8"
+
+[colors.input]
+border = "#3b4261"
+border_focus = "#bb9af7"
+border_error = "#f7768e"
+
+[colors.button.primary]
+background = "#292e42"
+foreground = "#c0caf5"
+hover = { background = "#3b4261" }
+focus = { outline = "colors.core.accent" }
+
+[colors.list.item.hover]
+foreground = "#c0caf5"
+secondary_foreground = "#a9b1d6"
+
+[colors.list.item.selection]
+background = "#292e42"
+foreground = "#c0caf5"
+secondary_background = "#292e42"
+secondary_foreground = "#a9b1d6"
+
+[colors.grid.item]
+background = "#0d0d0d"
+hover = { outline = "#c0caf5" }
+selection = { outline = "#bb9af7" }
+
+[colors.scrollbars]
+background = "#3b4261"
+
+[colors.loading]
+bar = "#bb9af7"
+spinner = "#c0caf5"
