@@ -4,11 +4,10 @@ vim.pack.add({
 
 require("tokyonight").setup({
 	style = "night",
-	-- Change the background
-	on_colors = function(colors)
-		colors.bg = "#000000"
-		colors.bg_statusline = "#000000"
-		colors.bg_float = "#000000"
-	end,
+	transparent = true,
+	styles = {
+		sidebars = "transparent",
+		floats = "transparent",
+	},
 })
 vim.cmd([[colorscheme tokyonight]])
