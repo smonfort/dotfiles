@@ -23,7 +23,7 @@
       }
    },
    "launcher_window": {
-      "opacity": 0.9,
+      "opacity": 0.95,
       "material": "none",
       "size": {
          "width": 1000,
