@@ -69,6 +69,7 @@ key-mapping.key-notation-to-key-code = {
   m = 'semicolon',
   comma = 'm',
   semicolon = 'comma',
+  minus = 'equal',
 }
 
 
@@ -136,6 +137,9 @@ gaps.outer.right =      8
     # See: https://nikitabobko.github.io/AeroSpace/commands#macos-native-fullscreen
     # alt-ctrl-f = 'macos-native-fullscreen'
 
+    # Open the vicinae popup to switch tmux session, from anywhere
+    cmd-alt-ctrl-shift-minus = 'exec-and-forget ~/.config/tmux/switch-session-vicinae.sh'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-cmd-h = 'move left'
     alt-shift-cmd-j = 'move down'
@@ -143,10 +147,8 @@ gaps.outer.right =      8
     alt-shift-cmd-l = 'move right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    # Bound to alt-ctrl (not plain alt) because on AZERTY, alt-minus is the
-    # physical key combo used with Option to type "}"
-    alt-ctrl-minus = 'resize smart -50'
-    alt-ctrl-equal = 'resize smart +50'
+    alt-ctrl-leftSquareBracket = 'resize smart -50'
+    alt-ctrl-rightSquareBracket = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     # Bound to hyperkey (cmd-ctrl-alt-shift via caps lock) instead of plain alt
