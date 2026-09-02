@@ -69,8 +69,10 @@ key-mapping.key-notation-to-key-code = {
   m = 'semicolon',
   comma = 'm',
   semicolon = 'comma',
-  minus = 'equal',
 }
+# No 'minus' remap: 'minus' is the physical ')' key on this AZERTY ISO
+# keyboard, used directly below. The old '=' shortcut uses 'equal' instead
+# (same physical key as before).
 
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
@@ -138,7 +140,11 @@ gaps.outer.right =      8
     # alt-ctrl-f = 'macos-native-fullscreen'
 
     # Open the vicinae popup to switch tmux session, from anywhere
-    cmd-alt-ctrl-shift-minus = 'exec-and-forget ~/.config/tmux/switch-session-vicinae.sh'
+    cmd-alt-ctrl-shift-equal = 'exec-and-forget ~/.config/vicinae/scripts/switch-session-vicinae.sh'
+
+    # Open the "Switch Claude Session" vicinae extension, from anywhere
+    # (sessions needing attention sort first, badged with a colored tag)
+    cmd-alt-ctrl-shift-minus = 'exec-and-forget vicinae vicinae://launch/@smonfort/claude-sessions/switch'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-cmd-h = 'move left'

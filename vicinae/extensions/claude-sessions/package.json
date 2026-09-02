@@ -1,0 +1,30 @@
+{
+	"$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
+	"name": "claude-sessions",
+	"title": "Claude Sessions",
+	"description": "Jump to a running Claude Code session and its tmux pane, sessions needing attention listed first.",
+	"icon": "icon.png",
+	"author": "smonfort",
+	"license": "MIT",
+	"categories": ["Developer Tools", "Productivity"],
+	"commands": [
+		{
+			"name": "switch",
+			"title": "Switch Claude Session",
+			"description": "List running Claude Code sessions and jump to the selected one's tmux pane.",
+			"mode": "view"
+		}
+	],
+	"dependencies": {
+		"@vicinae/api": "^0.27.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.9.2",
+		"@types/react": "^19.2.17",
+		"typescript": "^5.9.2"
+	},
+	"scripts": {
+		"build": "vici build",
+		"dev": "vici develop"
+	}
+}

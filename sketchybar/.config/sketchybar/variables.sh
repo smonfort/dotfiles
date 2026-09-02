@@ -13,5 +13,6 @@ export GREEN=0xff9ece6a
 export ORANGE=0xffff9e64
 export MUTED_ORANGE=0xffcc8f66
 export COMMENT=0xff565f89
+export CLAUDE_COLOR=0xffda7756
 
 export FONT="JetBrainsMono Nerd Font"
