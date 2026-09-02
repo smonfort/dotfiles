@@ -52,9 +52,12 @@ const BADGE_TO_KIND: Record<string, string> = {
 };
 
 // The icon reflects Claude's own live status (is it working right now?),
-// distinct from the "kind" tag above (has the user acknowledged it?).
+// distinct from the "kind" tag above (has the user acknowledged it?). Same
+// idea as the sketchybar claude_session icons (plugins/claude.sh): busy
+// gets a "thinking" glyph instead of a lightning bolt, which read as an
+// error/interrupt rather than active work.
 const STATUS_ICON: Record<string, Image.ImageLike> = {
-	busy: { source: Icon.Bolt, tintColor: TOKYONIGHT.green },
+	busy: { source: Icon.CircleProgress, tintColor: TOKYONIGHT.green },
 	idle: { source: Icon.Checkmark, tintColor: TOKYONIGHT.comment },
 	waiting: { source: Icon.Hourglass, tintColor: TOKYONIGHT.orange },
 };
