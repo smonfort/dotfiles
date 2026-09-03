@@ -233,3 +233,9 @@ gaps.outer.right =      8
 if.app-id = 'com.1password.1password'
 if.window-title-regex-substring = '^1Password$'
 run = ['layout floating']
+
+# Hammerspoon only creates small overlay/utility windows (loading spinners, popups) —
+# never tile them, they must stay floating where the script positions them
+[[on-window-detected]]
+if.app-id = 'org.hammerspoon.Hammerspoon'
+run = ['layout floating']
