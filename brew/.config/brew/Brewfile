@@ -34,6 +34,7 @@ brew "fx"
 brew "youplot"
 
 # Some dev stuff
+brew "lua"
 brew "pnpm"
 brew "poetry"
 brew "go"
