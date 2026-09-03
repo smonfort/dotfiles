@@ -1,9 +1,8 @@
--- ~/.hammerspoon only holds symlinks (dotfiles' `stow` setup); also watch the
--- real source tree, since editing a symlink's target doesn't touch this dir.
-local WATCHED_PATHS = {
-    os.getenv("HOME") .. "/.hammerspoon/",
-    os.getenv("HOME") .. "/git/github/smonfort/dotfiles/hammerspoon/.hammerspoon/",
-}
+local HERE = os.getenv("HOME") .. "/.hammerspoon/"
+
+-- ~/.hammerspoon is symlinked (stow); also watch init.lua's real target dir.
+local realInit = hs.fs.pathToAbsolute(HERE .. "init.lua")
+local WATCHED_PATHS = { HERE, realInit:match("(.*/)") }
 
 local watchers = {}
 for _, path in ipairs(WATCHED_PATHS) do
@@ -14,9 +13,8 @@ end
 
 hs.alert.show("Hammerspoon config loaded")
 
--- Each file under plugin/ is self-contained, like Neovim's plugin/ directory:
--- loaded automatically, no wiring needed here.
-local PLUGIN_DIR = os.getenv("HOME") .. "/.hammerspoon/plugin"
+-- Auto-loads plugin/*.lua, like Neovim's plugin/ directory.
+local PLUGIN_DIR = HERE .. "plugin"
 package.path = package.path .. ";" .. PLUGIN_DIR .. "/?.lua"
 
 for file in hs.fs.dir(PLUGIN_DIR) do
