@@ -1,39 +1,16 @@
 -- Hyper + ?: which-key-style overview of every hyperkey binding, read live
 -- from AeroSpace's config and this Hammerspoon config.
 
-local M = {}
-
-local HYPER = { "cmd", "alt", "ctrl", "shift" }
+local hyper = require("hyper")
+local THEME = require("theme")
+local render = require("html").render
+local escape = require("html").escape
 
 -- keycode 46 (M) types "," unshifted, "?" shifted — same AZERTY issue as
--- "=" / "-" in hyperkeys.lua.
+-- "=" / "-" in switch_tmux_session.lua / switch_claude_session.lua.
 local TOGGLE_KEY = hs.keycodes.map[46]
 
 local AEROSPACE_CONFIG = os.getenv("HOME") .. "/.config/aerospace/aerospace.toml"
-
--- TokyoNight Night, matching grammar_fix.lua and nvim.
-local THEME = {
-    BG = "#1a1b26",
-    BG_HIGHLIGHT = "#292e42",
-    FG = "#c0caf5",
-    FG_DARK = "#a9b1d6",
-    COMMENT = "#565f89",
-    BORDER = "#3b4261",
-    PURPLE = "#bb9af7",
-    FONT = "'JetBrainsMono Nerd Font Mono', Menlo, monospace",
-}
-
-local function render(template, vars)
-    return (template:gsub("{{([%u_]+)}}", function(key) return vars[key] or "" end))
-end
-
-local function htmlEscape(s)
-    if not s then return "" end
-    s = s:gsub("&", "&amp;")
-    s = s:gsub("<", "&lt;")
-    s = s:gsub(">", "&gt;")
-    return s
-end
 
 -- "move-workspace-to-monitor --wrap-around next" -> "Move workspace to monitor next"
 local function prettifyCommand(command)
@@ -82,31 +59,19 @@ local function parseAerospaceBindings()
     return groups
 end
 
-local function launchBindings()
-    local hyperkeys = require("hyperkeys")
-    local grammarFix = require("grammar_fix")
-
-    local entries = {}
-    for _, binding in ipairs(hyperkeys.BINDINGS) do
-        table.insert(entries, { key = binding.key, label = binding.label })
-    end
-    table.insert(entries, { key = grammarFix.KEY, label = grammarFix.LABEL })
-    return entries
-end
-
 local function keycap(text)
-    return '<span class="key">' .. htmlEscape(text:upper()) .. "</span>"
+    return '<span class="key">' .. escape(text:upper()) .. "</span>"
 end
 
 local function row(keyText, label)
-    return string.format('<div class="row">%s<span class="label">%s</span></div>', keycap(keyText), htmlEscape(label))
+    return string.format('<div class="row">%s<span class="label">%s</span></div>', keycap(keyText), escape(label))
 end
 
 local function section(title, bodyHtml, caption)
-    local captionHtml = caption and ('<div class="caption">' .. htmlEscape(caption) .. "</div>") or ""
+    local captionHtml = caption and ('<div class="caption">' .. escape(caption) .. "</div>") or ""
     return string.format(
         '<div class="section"><div class="section-title">%s</div>%s%s</div>',
-        htmlEscape(title), captionHtml, bodyHtml
+        escape(title), captionHtml, bodyHtml
     )
 end
 
@@ -140,8 +105,8 @@ local function buildHtml()
     end
 
     local rows = {}
-    for _, item in ipairs(launchBindings()) do
-        table.insert(rows, row(item.key, item.label))
+    for _, item in ipairs(hyper.bindings()) do
+        table.insert(rows, row(item.key, item.description))
     end
     table.insert(sections, section("Launch", table.concat(rows)))
 
@@ -272,8 +237,4 @@ local function toggle()
     end
 end
 
-function M.bind()
-    hs.hotkey.bind(HYPER, TOGGLE_KEY, toggle)
-end
-
-return M
+hyper.bind(TOGGLE_KEY, "Show hyperkey map", toggle)

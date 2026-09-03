@@ -13,15 +13,15 @@ end
 
 hs.alert.show("Hammerspoon config loaded")
 
+-- lua/ holds shared utilities required by plugin/ files, like nvim's lua/.
+package.path = package.path .. ";" .. HERE .. "lua/?.lua"
+
 -- Auto-loads plugin/*.lua, like Neovim's plugin/ directory.
 local PLUGIN_DIR = HERE .. "plugin"
 package.path = package.path .. ";" .. PLUGIN_DIR .. "/?.lua"
 
 for file in hs.fs.dir(PLUGIN_DIR) do
     if file:match("%.lua$") then
-        local plugin = require((file:gsub("%.lua$", "")))
-        if plugin.bind then
-            plugin.bind()
-        end
+        require((file:gsub("%.lua$", "")))
     end
 end
