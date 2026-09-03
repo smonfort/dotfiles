@@ -1,0 +1,30 @@
+{
+	"$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
+	"name": "aerospace-workspaces",
+	"title": "AeroSpace Workspaces",
+	"description": "Switch to an AeroSpace workspace, with icons for the apps open in each.",
+	"icon": "icon.png",
+	"author": "smonfort",
+	"license": "MIT",
+	"categories": ["System", "Productivity"],
+	"commands": [
+		{
+			"name": "switch",
+			"title": "Switch Workspace",
+			"description": "List AeroSpace workspaces that have at least one window, with icons for their open apps, and jump to the selected one.",
+			"mode": "view"
+		}
+	],
+	"dependencies": {
+		"@vicinae/api": "^0.27.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.9.2",
+		"@types/react": "^19.2.17",
+		"typescript": "^5.9.2"
+	},
+	"scripts": {
+		"build": "vici build",
+		"dev": "vici develop"
+	}
+}
