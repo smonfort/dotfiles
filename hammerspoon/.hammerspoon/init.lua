@@ -14,5 +14,16 @@ end
 
 hs.alert.show("Hammerspoon config loaded")
 
-require("grammar_fix").bind()
-require("hyperkeys").bind()
+-- Each file under plugin/ is self-contained, like Neovim's plugin/ directory:
+-- loaded automatically, no wiring needed here.
+local PLUGIN_DIR = os.getenv("HOME") .. "/.hammerspoon/plugin"
+package.path = package.path .. ";" .. PLUGIN_DIR .. "/?.lua"
+
+for file in hs.fs.dir(PLUGIN_DIR) do
+    if file:match("%.lua$") then
+        local plugin = require((file:gsub("%.lua$", "")))
+        if plugin.bind then
+            plugin.bind()
+        end
+    end
+end

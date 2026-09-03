@@ -20,21 +20,24 @@ local function runTask(launchPath, arguments)
 end
 
 local BINDINGS = {
-	-- Vicinae popup to switch tmux session
 	{
 		key = KEY_EQUAL,
+		label = "Switch tmux session",
 		action = function()
 			runTask(os.getenv("HOME") .. "/.config/vicinae/scripts/switch-session-vicinae.sh")
 		end,
 	},
-	-- Vicinae "Switch Claude Session" extension
 	{
 		key = KEY_MINUS,
+		label = "Switch Claude session",
 		action = function()
 			runTask("/opt/homebrew/bin/vicinae", { "vicinae://launch/@smonfort/claude-sessions/switch" })
 		end,
 	},
 }
+
+-- Exposed so whichkey.lua can list these without duplicating them.
+M.BINDINGS = BINDINGS
 
 function M.bind()
 	for _, binding in ipairs(BINDINGS) do
