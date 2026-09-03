@@ -139,13 +139,6 @@ gaps.outer.right =      8
     # See: https://nikitabobko.github.io/AeroSpace/commands#macos-native-fullscreen
     # alt-ctrl-f = 'macos-native-fullscreen'
 
-    # Open the vicinae popup to switch tmux session, from anywhere
-    cmd-alt-ctrl-shift-equal = 'exec-and-forget ~/.config/vicinae/scripts/switch-session-vicinae.sh'
-
-    # Open the "Switch Claude Session" vicinae extension, from anywhere
-    # (sessions needing attention sort first, badged with a colored tag)
-    cmd-alt-ctrl-shift-minus = 'exec-and-forget vicinae vicinae://launch/@smonfort/claude-sessions/switch'
-
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-cmd-h = 'move left'
     alt-shift-cmd-j = 'move down'
