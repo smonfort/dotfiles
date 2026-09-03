@@ -6,8 +6,9 @@ local M = {}
 local MODS = { "cmd", "alt", "ctrl", "shift" }
 local bindings = {}
 
-function M.bind(key, description, fn)
-    table.insert(bindings, { key = key, description = description })
+function M.bind(key, description, fn, opts)
+    local group = opts and opts.group or "launch"
+    table.insert(bindings, { key = key, description = description, group = group })
     hs.hotkey.bind(MODS, key, fn)
 end
 

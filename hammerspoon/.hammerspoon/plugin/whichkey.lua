@@ -36,7 +36,7 @@ local function parseAerospaceBindings()
         elseif inSection then
             local keyNotation, rawValue = line:match("^%s*([%w%-]+)%s*=%s*(.+)$")
             local letter = keyNotation and keyNotation:match("^cmd%-alt%-ctrl%-shift%-(.+)$")
-            local command = letter and rawValue:match("'([^']+)'")
+            local command = letter and rawValue:match("['\"]([^'\"]+)['\"]")
 
             if command then
                 if command:match("^focus %a+$") then
@@ -79,6 +79,15 @@ local function buildHtml()
     local groups = parseAerospaceBindings() or { focus = {}, workspace = {}, monitor = {}, other = {} }
     local sections = {}
 
+    local launchBindings = {}
+    for _, item in ipairs(hyper.bindings()) do
+        if item.group == "focus" then
+            table.insert(groups.focus, { key = item.key, label = item.description })
+        else
+            table.insert(launchBindings, item)
+        end
+    end
+
     if #groups.focus > 0 then
         local rows = {}
         for _, item in ipairs(groups.focus) do
@@ -105,7 +114,7 @@ local function buildHtml()
     end
 
     local rows = {}
-    for _, item in ipairs(hyper.bindings()) do
+    for _, item in ipairs(launchBindings) do
         table.insert(rows, row(item.key, item.description))
     end
     table.insert(sections, section("Launch", table.concat(rows)))
