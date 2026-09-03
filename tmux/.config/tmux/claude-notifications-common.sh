@@ -13,6 +13,9 @@
 # seen" flag, in ~/.cache/claude-notified/<session_id> (kind=..., at=...),
 # written by notify-attention.sh — neither Claude Code nor tmux know this.
 
+# Vicinae's launchd PATH lacks Homebrew's bin dirs.
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:$PATH"
+
 CLAUDE_NOTIFIED_DIR="$HOME/.cache/claude-notified"
 
 # Walks up the process ancestry of $1 (a pid) up to a few levels, returns

@@ -23,9 +23,8 @@ const TOKYONIGHT = {
 	comment: "#565f89",
 };
 
-// Reuses the same tmux/claude helpers as the tmux-side pickers (prefix+q,
-// the vicinae dmenu picker) rather than re-implementing pid->pane
-// resolution here — single source of truth stays in bash.
+// Reuses the shared bash helpers (also used by ack-claude-notification.sh)
+// rather than re-implementing pid->pane resolution here.
 
 type Session = {
 	sortKey: number;
