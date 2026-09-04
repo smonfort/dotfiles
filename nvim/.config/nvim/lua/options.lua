@@ -27,6 +27,7 @@ opt.cursorline = true -- highlight the current cursor line
 opt.spell = false
 
 -- appearance
+opt.fillchars = { eob = " " } -- hide the ~ shown on lines past the end of buffer
 opt.guicursor = {
 	"n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100",
 	"i-ci:ver25-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100",
