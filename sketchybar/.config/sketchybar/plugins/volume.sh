@@ -5,6 +5,7 @@
 
 if [ "$SENDER" = "volume_change" ]; then
   VOLUME="$INFO"
+  PIDFILE="/tmp/sketchybar_volume_hide.pid"
 
   case "$VOLUME" in
     [6-9][0-9]|100) ICON="󰕾"
@@ -16,5 +17,10 @@ if [ "$SENDER" = "volume_change" ]; then
     *) ICON="󰖁"
   esac
 
-  sketchybar --set "$NAME" icon="$ICON" label="$VOLUME%"
+  [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+
+  sketchybar --set "$NAME" drawing=on icon="$ICON" label="$VOLUME%"
+
+  ( sleep 4 && sketchybar --set "$NAME" drawing=off ) &
+  echo $! > "$PIDFILE"
 fi
