@@ -1,6 +1,10 @@
 #!/bin/bash
 # Fuzzy-pick a tmux session (open) or tmuxinator project (closed) and switch to it, starting it if needed.
 
+# Hammerspoon's hs.task runs this without a login shell, so Homebrew's bin
+# dir isn't on PATH like it is from a terminal.
+export PATH="/opt/homebrew/bin:$PATH"
+
 open_icon=$'🟢'
 closed_icon=$'💤'
 
