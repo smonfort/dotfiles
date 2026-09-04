@@ -4,6 +4,8 @@
 # getting sorted at creation time.
 set -euo pipefail
 
+# Hammerspoon runs with a minimal PATH that omits Homebrew's bin dir.
+AEROSPACE="${AEROSPACE_BIN:-/opt/homebrew/bin/aerospace}"
 CONFIG="$HOME/.config/aerospace/aerospace.toml"
 
 # toml-x merge normalizes each [[on-window-detected]] block to:
@@ -29,5 +31,5 @@ while IFS='|' read -r app_id window_id workspace; do
   target=$(awk -v id="$app_id" '$1 == id { print $2; exit }' <<< "$mapping")
   [ -z "$target" ] && continue
   [ "$target" = "$workspace" ] && continue
-  aerospace move-node-to-workspace "$target" --window-id "$window_id"
-done < <(aerospace list-windows --all --format '%{app-bundle-id}|%{window-id}|%{workspace}')
+  "$AEROSPACE" move-node-to-workspace "$target" --window-id "$window_id"
+done < <("$AEROSPACE" list-windows --all --format '%{app-bundle-id}|%{window-id}|%{workspace}')
