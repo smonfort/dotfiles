@@ -41,6 +41,7 @@ source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/magic_mouse.sh
 source $ITEM_DIR/claude.sh
+source $ITEM_DIR/slack.sh
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
