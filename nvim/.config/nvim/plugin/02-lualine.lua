@@ -69,6 +69,24 @@ local filename_icon = {
 	padding = { left = 3, right = 1 },
 }
 
+-- Path relative to the cwd nvim was opened in (":." modifier), e.g. "b/c.txt".
+-- Split into dir and tail so each half can carry its own color below.
+local function relative_path()
+	return vim.fn.expand("%:.")
+end
+
+local function relative_dir()
+	return relative_path():match("^(.*/)") or ""
+end
+
+local function relative_tail()
+	local path = relative_path()
+	if path == "" then
+		return ""
+	end
+	return path:match("([^/]*)$") or path
+end
+
 local function listed_buffer_count()
 	return #vim.tbl_filter(function(bufnr)
 		return vim.fn.buflisted(bufnr) == 1
@@ -87,8 +105,8 @@ local buffer_count = {
 }
 
 -- A plain "[+]"/"[-]" reads as an afterthought; a colored dot/lock stand out the way
--- an editor's dirty-tab indicator does. file_status is turned off on filename below
--- so these two replace it instead of stacking on top.
+-- an editor's dirty-tab indicator does. relative_tail above has no built-in status
+-- marker to turn off, so these two are the only modified/readonly indicator.
 local modified_indicator = {
 	function()
 		return vim.bo.modified and "●" or ""
@@ -117,11 +135,15 @@ require("lualine").setup({
 		lualine_b = {},
 		lualine_c = {
 			filename_icon,
-			-- starship's directory module: bold cyan
+			-- starship's directory module: bold cyan for the filename, muted for the
+			-- leading path segments (e.g. "b/" in "b/c.txt")
 			{
-				"filename",
-				file_status = false,
-				symbols = { unnamed = "" },
+				relative_dir,
+				color = { fg = colors.comment },
+				padding = { left = 0, right = 0 },
+			},
+			{
+				relative_tail,
 				color = { fg = colors.magenta, gui = "bold" },
 				padding = { left = 0, right = 0 },
 			},
