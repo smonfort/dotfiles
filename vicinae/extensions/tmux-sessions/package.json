@@ -1,0 +1,30 @@
+{
+	"$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
+	"name": "tmux-sessions",
+	"title": "Tmux Sessions",
+	"description": "Switch tmux session, distinguishing the one attached to your client, and kill sessions you no longer need.",
+	"icon": "icon.png",
+	"author": "smonfort",
+	"license": "MIT",
+	"categories": ["Developer Tools", "Productivity"],
+	"commands": [
+		{
+			"name": "switch",
+			"title": "Switch tmux Session",
+			"description": "List tmux sessions (attached session first) and tmuxinator projects, jump to one, or kill it with Shift+Enter.",
+			"mode": "view"
+		}
+	],
+	"dependencies": {
+		"@vicinae/api": "^0.27.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.9.2",
+		"@types/react": "^19.2.17",
+		"typescript": "^5.9.2"
+	},
+	"scripts": {
+		"build": "vici build",
+		"dev": "vici develop"
+	}
+}
