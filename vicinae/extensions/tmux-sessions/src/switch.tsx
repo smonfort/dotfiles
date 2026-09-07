@@ -84,7 +84,7 @@ async function switchTo(session: Session) {
 
 async function killSession(session: Session, refresh: () => void) {
 	const confirmed = await confirmAlert({
-		title: `Kill "${session.name}"?`,
+		title: `Kill "${session.name}" session?`,
 		message:
 			session.kind === "attached"
 				? "This is your currently attached session, killing it will detach your tmux client."
