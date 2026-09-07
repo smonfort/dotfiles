@@ -1,18 +1,17 @@
 #!/bin/bash
 # Runs on claude_notification_change and on every update_freq tick, as the
 # invisible claude_manager item (see items/claude.sh). Reconciles one visible
-# claude_session_<id> icon per running interactive Claude Code session
-# against the bar's actual item list — queried fresh each run via
-# `--query bar` rather than tracked in a state file, so a sketchybar restart
-# can't desync it — then pulses each session's icon independently (by
-# toggling its color between the brand color and the background color, not
-# icon.drawing=off which shrinks the glyph) while that session has an
-# unacknowledged notification — see ~/.claude/notify-attention.sh and
-# .tmux.conf's ack-claude-notification.sh.
+# claude_session_<id> icon per interactive Claude Code session that's either
+# busy (thinking) or waiting on the user — a session idling at its prompt
+# with nothing pending gets no icon — against the bar's actual item list,
+# queried fresh each run via `--query bar` rather than tracked in a state
+# file, so a sketchybar restart can't desync it — then pulses each session's
+# icon independently (by toggling its color between the brand color and the
+# background color, not icon.drawing=off which shrinks the glyph) while that
+# session has an unacknowledged notification — see ~/.claude/notify-attention.sh
+# and .tmux.conf's ack-claude-notification.sh.
 
 source "$CONFIG_DIR/variables.sh"
-
-NOTIFIED_DIR="$HOME/.cache/claude-notified"
 
 # Sessions actively generating (status=="busy") swap the static Claude
 # wordmark for a brain glyph (nf-md-brain) — reads as "thinking", unlike
@@ -27,16 +26,27 @@ item_name_for() { echo "claude_session_${1//-/_}"; }
 
 SESSION_DATA=""
 if command -v claude >/dev/null 2>&1; then
-  SESSION_DATA=$(claude agents --json 2>/dev/null | jq -r '[.[] | select(.kind=="interactive")] | sort_by(.startedAt) | .[] | "\(.sessionId)\t\(.status)"' 2>/dev/null)
+  SESSION_DATA=$(claude agents --json 2>/dev/null | jq -r '[.[] | select(.kind=="interactive")] | sort_by(.startedAt) | .[] | "\(.sessionId)\t\(.status)\t\(.name)"' 2>/dev/null)
 fi
 
+NOTIFIED_DIR="$HOME/.cache/claude-notified"
+
+# Only surface sessions that are actively thinking (status=="busy") or
+# waiting on the user (a pending ~/.cache/claude-notified/<sid> file, set by
+# notify-attention.sh on permission/idle prompts and cleared on focus — see
+# ack-claude-notification.sh). A session just sitting idle at its prompt
+# with nothing pending gets no item at all; the removal pass below drops it
+# the moment it stops qualifying.
 DESIRED_NAMES=()
 DESIRED_SIDS=()
 DESIRED_STATUSES=()
-while IFS=$'\t' read -r sid status; do
+DESIRED_LABELS=()
+while IFS=$'\t' read -r sid status sname; do
   [ -z "$sid" ] && continue
+  [ "$status" = "busy" ] || [ -f "$NOTIFIED_DIR/$sid" ] || continue
   DESIRED_SIDS+=("$sid")
   DESIRED_STATUSES+=("$status")
+  DESIRED_LABELS+=("$sname")
   DESIRED_NAMES+=("$(item_name_for "$sid")")
 done <<< "$SESSION_DATA"
 
@@ -59,17 +69,22 @@ for name in "${DESIRED_NAMES[@]}"; do
                --set "$name" \
                icon.color="$CLAUDE_COLOR" \
                icon.padding_left=8 \
-               icon.padding_right=8 \
-               label.drawing=off \
+               icon.padding_right=4 \
+               label.drawing=on \
+               label.color="$WHITE" \
                label.padding_left=0 \
-               label.padding_right=0 \
+               label.padding_right=10 \
                background.drawing=on \
                background.color="$ITEM_BG_COLOR" \
+               background.height=24 \
+               background.corner_radius=5 \
                2>/dev/null
   fi
 done
 
 # Keep them ordered by session start time, grouped next to the driver item.
+# Also keeps this group leftmost among right-side items, since a fresh
+# --reorder outranks any right-side item untouched since startup.
 [ "${#DESIRED_NAMES[@]}" -gt 0 ] && sketchybar --reorder claude_manager "${DESIRED_NAMES[@]}" 2>/dev/null
 
 # Pulse phase from wall-clock parity (deterministic, sidesteps sketchybar's
@@ -84,6 +99,12 @@ ANY_NOTIFIED=0
 for i in "${!DESIRED_SIDS[@]}"; do
   sid="${DESIRED_SIDS[$i]}"
   name="${DESIRED_NAMES[$i]}"
+
+  sketchybar --set "$name" label="${DESIRED_LABELS[$i]}" \
+                            label.font="$FONT:Semibold:14.0" \
+                            label.color="$WHITE" \
+                            label.padding_left=0 \
+                            label.padding_right=10
 
   if [ "${DESIRED_STATUSES[$i]}" = "busy" ]; then
     sketchybar --set "$name" icon="$BUSY_ICON" icon.font="$BUSY_ICON_FONT" icon.y_offset=-1
