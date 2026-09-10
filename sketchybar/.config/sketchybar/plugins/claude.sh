@@ -72,7 +72,7 @@ for name in "${DESIRED_NAMES[@]}"; do
                icon.padding_right=4 \
                label.drawing=on \
                label.color="$WHITE" \
-               label.padding_left=0 \
+               label.padding_left=10 \
                label.padding_right=10 \
                background.drawing=on \
                background.color="$ITEM_BG_COLOR" \
@@ -103,7 +103,7 @@ for i in "${!DESIRED_SIDS[@]}"; do
   sketchybar --set "$name" label="${DESIRED_LABELS[$i]}" \
                             label.font="$FONT:Semibold:14.0" \
                             label.color="$WHITE" \
-                            label.padding_left=0 \
+                            label.padding_left=10 \
                             label.padding_right=10
 
   if [ "${DESIRED_STATUSES[$i]}" = "busy" ]; then
