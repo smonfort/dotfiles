@@ -24,6 +24,9 @@ const TOKYONIGHT = {
 const TMUX = "/opt/homebrew/bin/tmux";
 const TMUXINATOR = "/opt/homebrew/bin/tmuxinator";
 
+// tmuxinator itself shells out to `tmux` by bare name, so it needs this too.
+const ENV_WITH_HOMEBREW = { ...process.env, PATH: `/opt/homebrew/bin:${process.env.PATH ?? ""}` };
+
 type Kind = "attached" | "open" | "closed";
 
 type Session = {
@@ -74,7 +77,8 @@ function loadSessions(): Session[] {
 
 async function switchTo(session: Session) {
 	try {
-		if (session.kind === "closed") execFileSync(TMUXINATOR, ["start", session.name]);
+		if (session.kind === "closed")
+			execFileSync(TMUXINATOR, ["start", session.name], { env: ENV_WITH_HOMEBREW });
 		execFileSync(TMUX, ["switch-client", "-t", session.name]);
 		await closeMainWindow();
 	} catch (error) {
