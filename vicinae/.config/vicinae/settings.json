@@ -17,6 +17,12 @@
    "global_shortcuts": {
       "toggle": "super+control+alt+shift+SPACE"
    },
+   "font": {
+      "rendering": "qt",
+      "normal": {
+         "family": "JetBrainsMono Nerd Font"
+      }
+   },
    "theme": {
       "dark": {
          "name": "tokyonight-night"
@@ -24,10 +30,10 @@
    },
    "launcher_window": {
       "opacity": 0.95,
-      "material": "none",
       "size": {
          "width": 1000,
          "height": 622
-      }
+      },
+      "material": "none"
    }
 }
