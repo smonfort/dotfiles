@@ -1,0 +1,5 @@
+nerdfont: true
+merge_strategy: rebase
+mode: session 
+agent: claude
+

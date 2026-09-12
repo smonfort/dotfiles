@@ -107,6 +107,7 @@ brew "neovim"
 # AI
 cask "claude-code"
 cask "claude"
+brew "raine/workmux/workmux", trusted: true
 
 # Secrets
 cask "1password"
