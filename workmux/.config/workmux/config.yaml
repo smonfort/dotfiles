@@ -3,3 +3,15 @@ merge_strategy: rebase
 mode: session 
 agent: claude
 
+windows:
+  - name: nvim
+    panes:
+      - command: nvim
+  - name: claude
+    panes:
+      - command: <agent>
+        focus: true
+  - name: term
+    panes:
+      - command: pwd
+
