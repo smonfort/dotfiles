@@ -63,8 +63,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # Required for psql
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# Should be at the end of the file for starship to work
-eval "$(starship init zsh)"
+eval "$(workmux completions zsh)"
+
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -76,3 +76,6 @@ esac
 
 export PATH="/opt/homebrew/opt/ffmpeg-full/bin:$PATH"
 eval "$(mise activate zsh)"
+
+# Should be at the end of the file for starship to work
+eval "$(starship init zsh)"
