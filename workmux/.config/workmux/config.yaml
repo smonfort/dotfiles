@@ -15,3 +15,21 @@ windows:
     panes:
       - command: pwd
 
+# tokyonight (night) palette, matching nvim/.config/nvim/plugin/00-colorscheme.lua
+theme:
+  custom:
+    current_row_bg: "#292e42"
+    highlight_row_bg: "#3b4261"
+    current_worktree_fg: "#7aa2f7"
+    dimmed: "#565f89"
+    text: "#c0caf5"
+    border: "#414868"
+    help_border: "#545c7e"
+    help_muted: "#737aa2"
+    header: "#9d7cd8"
+    keycap: "#e0af68"
+    info: "#0db9d7"
+    success: "#9ece6a"
+    warning: "#e0af68"
+    danger: "#db4b4b"
+    accent: "#7aa2f7"
