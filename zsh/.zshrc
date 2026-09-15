@@ -64,7 +64,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 eval "$(workmux completions zsh)"
-
+eval "$(zoxide init zsh)"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
