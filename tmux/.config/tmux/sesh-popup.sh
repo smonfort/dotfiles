@@ -14,6 +14,6 @@ if [ -z "$TMUX" ]; then
   popup_target=(-c "$client")
 fi
 
-tmux display-popup "${popup_target[@]}" -E -w 25% -h 50% -T ' Switch tmux session ' \
+tmux display-popup "${popup_target[@]}" -E -w 25% -h 50% -T '   Switch tmux session ' \
   -s 'fg=#c0caf5,bg=#000000' -S 'fg=#bb9af7' \
   "$HOME/.config/tmux/sesh-picker.sh"
