@@ -103,7 +103,15 @@ if [ "${1:-}" = "--picker" ]; then
   number=$(cut -f2 <<<"$selected")
   title=$(cut -f3 <<<"$selected")
 
-  slug=$(iconv -t ascii//TRANSLIT <<<"$title" 2>/dev/null \
+  # NFD-decompose and drop combining marks to strip accents ("été" -> "ete").
+  # macOS iconv's TRANSLIT mangled this ("clé" -> "el?") and its exit code
+  # was killing the script under set -e once selection was made.
+  slug=$(python3 -c '
+import sys, unicodedata
+s = sys.stdin.read()
+s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+print(s)
+' <<<"$title" \
     | tr '[:upper:]' '[:lower:]' \
     | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' \
     | cut -c1-40)
