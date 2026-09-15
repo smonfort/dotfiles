@@ -10,5 +10,7 @@ focus_workmux_dashboard() {
   local client
   client=$(tmux list-clients -F '#{client_tty}' 2>/dev/null | head -1)
   [ -n "$client" ] || return 0
-  tmux display-popup -c "$client" -E -w 100% -h 100% -T " workmux dashboard " "workmux dashboard" 2>/dev/null
+  tmux display-popup -c "$client" -E -w 100% -h 100% -T " workmux dashboard " \
+    -s 'fg=#c0caf5,bg=#000000' -S 'fg=#bb9af7' \
+    "workmux dashboard" 2>/dev/null
 }
