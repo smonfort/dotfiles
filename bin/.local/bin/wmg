@@ -1,0 +1,141 @@
+#!/bin/bash
+# Pick an open GitHub issue via fzf, for whatever repo the current directory
+# belongs to, and spin up a workmux worktree for it. The issue title + body
+# are injected as the agent prompt.
+
+set -euo pipefail
+
+# Called back by fzf's --preview. $2 is the issue number, $3 the repo
+# ("owner/name") passed down from --picker so this never has to shell out
+# to `gh repo view` on every single preview render.
+if [ "${1:-}" = "--render-preview" ]; then
+  # glow pads full-width heading backgrounds out to exactly -w columns; a
+  # width that only barely undershoots the real pane width has, in practice,
+  # still overflowed it (see git history). Leave a generous safety margin
+  # this time, and use the freed-up columns as left/right padding.
+  left=2
+  right=6
+  width=$(( ${FZF_PREVIEW_COLUMNS:-80} - left - right ))
+  [ "$width" -lt 20 ] && width=20
+  gh issue view "$2" --repo "$3" --json number,title,body,author,createdAt,labels \
+    | LC_TIME=C jq -r '
+        def label_icon(name):
+          if   name == "bug"              then ""
+          elif name == "enhancement"      then ""
+          elif name == "documentation"    then ""
+          elif name == "question"         then ""
+          elif name == "good first issue" then ""
+          elif name == "help wanted"      then ""
+          elif name == "duplicate"        then ""
+          elif name == "wontfix"          then ""
+          elif name == "Support"          then ""
+          elif name == "dependencies"     then ""
+          else "" end;
+        "# " + .title + "\n\n"
+        + "*@" + .author.login
+        + " · created " + (.createdAt | fromdateiso8601 | strftime("%d %b %Y"))
+        + (if (.labels|length) > 0
+           then " · " + (.labels | map(label_icon(.name) + " " + .name) | join("  "))
+           else "" end)
+        + "*\n\n"
+        + (.body // "*(pas de description)*")
+      ' \
+    | glow -s auto -w "$width" - \
+    | awk -v n="$left" '{printf "%*s%s\n", n, "", $0}'
+  exit 0
+fi
+
+# Runs the actual picker + worktree creation. $2 is the repo, $3 its
+# worktree directory (workmux runs relative to it). Kept separate from the
+# entry point below so it can be re-invoked inside a tmux popup, which
+# already draws its own border/title — fzf itself stays borderless to avoid
+# stacking two mismatched frames.
+if [ "${1:-}" = "--picker" ]; then
+  REPO="$2"
+  REPO_DIR="$3"
+  SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+
+  # tokyonight "night" palette, same as sesh-picker.sh / nvim colorscheme
+  TOKYONIGHT_FZF='fg:#c0caf5,bg:#000000,hl:#7aa2f7,fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff,info:#565f89,prompt:#7aa2f7,pointer:#f7768e,marker:#9ece6a,spinner:#7aa2f7,header:#565f89,border:#3b4261,label:#c0caf5,preview-border:#3b4261,preview-label:#c0caf5'
+
+  selected=$(gh issue list --repo "$REPO" --state open --limit 200 \
+    --json number,title,labels \
+    | jq -r '
+        # Icons are Nerd Font glyphs, not emoji, and that is load-bearing.
+        # fzf, tmux and WezTerm each keep their own character-width table
+        # and they disagree about emoji: an emoji-presentation sequence
+        # (base + U+FE0F) is 2 columns to fzf/tmux but 1 to WezTerm under
+        # its default Unicode 9 rules. That one-column drift pulled the
+        # list/preview divider left on every icon row, bending it out of
+        # line. Nerd Font glyphs sit in the private use area, where all
+        # three agree on a single column, so the divider stays straight.
+        def c(col; s): "[38;2;" + col + "m" + s + "[0m";
+        def icon:
+          if   index("bug")              then c("247;118;142"; "")
+          elif index("enhancement")      then c("158;206;106"; "")
+          elif index("documentation")    then c("122;162;247"; "")
+          elif index("question")         then c("187;154;247"; "")
+          elif index("good first issue") then c("115;218;202"; "")
+          elif index("help wanted")      then c("255;158;100"; "")
+          elif index("duplicate")        then c("86;95;137";   "")
+          elif index("wontfix")          then c("65;72;104";   "")
+          elif index("Support")          then c("125;207;255"; "")
+          elif index("dependencies")     then c("224;175;104"; "")
+          else                                c("86;95;137";   "") end;
+        .[] as $i
+          | ($i.labels | map(.name) | icon) as $icon
+          | c("86;95;137"; "[" + ($i.number|tostring) + "]") as $id
+          | c("192;202;245"; $i.title) as $title
+          | [$id + $icon + " " + $title,
+             ($i.number|tostring), $i.title]
+          | @tsv
+      ' \
+    | fzf --no-sort --ansi --layout=reverse --color="$TOKYONIGHT_FZF" \
+        --pointer=' ' --gutter=' ' --prompt '» ' \
+        --delimiter='\t' --with-nth=1 \
+        --preview "$SELF --render-preview {2} $REPO" \
+        --preview-window right:55%:wrap:border-left \
+        --preview-wrap-sign=''
+  )
+
+  [ -n "$selected" ] || exit 0
+
+  number=$(cut -f2 <<<"$selected")
+  title=$(cut -f3 <<<"$selected")
+
+  slug=$(iconv -t ascii//TRANSLIT <<<"$title" 2>/dev/null \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' \
+    | cut -c1-40)
+  branch="issue-${number}-${slug}"
+
+  body=$(gh issue view "$number" --repo "$REPO" --json body -q '.body // ""')
+  prompt="Résous l'issue GitHub #${number} : ${title}"
+  [ -n "$body" ] && prompt+=$'\n\n'"$body"
+
+  cd "$REPO_DIR"
+  workmux add "$branch" --base main -o -p "$prompt"
+  exit 0
+fi
+
+# Entry point: detect the repo from the current directory (once — --picker
+# and --render-preview both receive it as an argument instead of shelling
+# out to `gh repo view` again themselves), then run the picker inside a
+# tmux popup when possible, same border/title convention as sesh-popup.sh.
+REPO_DIR="$(git rev-parse --show-toplevel 2>/dev/null)" \
+  || { echo "wmg: not inside a git repository" >&2; exit 1; }
+REPO="$(cd "$REPO_DIR" && gh repo view --json nameWithOwner -q .nameWithOwner 2>/dev/null)"
+[ -n "$REPO" ] \
+  || { echo "wmg: couldn't detect a GitHub repo for $REPO_DIR (check 'gh repo view' / the 'origin' remote)" >&2; exit 1; }
+
+repo_name="${REPO##*/}"
+title=" $(tr '[:lower:]' '[:upper:]' <<<"${repo_name:0:1}")${repo_name:1} GitHub issues "
+
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+if [ -n "${TMUX:-}" ]; then
+  tmux display-popup -E -w 90% -h 75% -T "$title" \
+    -s 'fg=#c0caf5,bg=#000000' -S 'fg=#bb9af7' \
+    "$SELF" --picker "$REPO" "$REPO_DIR"
+else
+  "$SELF" --picker "$REPO" "$REPO_DIR"
+fi
