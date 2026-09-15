@@ -95,6 +95,8 @@ brew "gomplate"
 brew "uv"
 brew "imagemagick"
 brew "parallel"
+brew "zoxide"
+brew "sesh"
 
 # Office & Communication
 cask "slack"
