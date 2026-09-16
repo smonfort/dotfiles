@@ -39,6 +39,7 @@ source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/calendar.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
+source $ITEM_DIR/secure_input.sh
 source $ITEM_DIR/magic_mouse.sh
 source $ITEM_DIR/claude.sh
 source $ITEM_DIR/slack.sh
