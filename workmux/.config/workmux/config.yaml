@@ -11,6 +11,9 @@ windows:
     panes:
       - command: <agent>
         focus: true
+  - name: lazygit
+    panes:
+      - command: lazygit
   - name: term
     panes:
       - command: pwd
