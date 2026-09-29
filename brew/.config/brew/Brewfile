@@ -63,6 +63,7 @@ cask "brave-browser"
 cask "google-chrome"
 
 # Fancy terminal utils
+brew "superfile"
 tap "vjeantet/tap", trusted: true
 brew "vjeantet/tap/alerter"
 cask "font-jetbrains-mono-nerd-font"
@@ -107,7 +108,7 @@ brew "tree-sitter-cli"
 brew "neovim"
 
 # AI
-cask "claude-code"
+cask "claude-code@latest"
 cask "claude"
 brew "raine/workmux/workmux", trusted: true
 
