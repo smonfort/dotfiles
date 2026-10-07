@@ -1,0 +1,66 @@
+#!/bin/bash
+# Remove workmux worktrees whose GitHub PR has been merged.
+#
+# `workmux rm --gone` only works when GitHub deletes the remote branch on
+# merge, so ask gh directly instead. A worktree is only removed when it is
+# clean, no agent is busy in it, and its HEAD is exactly the merged PR head
+# (nothing committed after the merge would be lost).
+#
+# Usage: wmprune [-n|--dry-run] [project_path...]
+# Without paths, scans every repo workmux tracks agents for.
+
+set -uo pipefail
+
+dry_run=false
+if [ "${1:-}" = "-n" ] || [ "${1:-}" = "--dry-run" ]; then
+  dry_run=true
+  shift
+fi
+
+log() { echo "$(date '+%F %T') $*"; }
+
+if [ $# -gt 0 ]; then
+  projects=("$@")
+else
+  all=$(workmux list --all --json) || exit 1
+  projects=()
+  while IFS= read -r p; do projects+=("$p"); done < <(
+    jq -r '[.[].project_path] | unique[]' <<<"$all"
+  )
+fi
+[ ${#projects[@]} -eq 0 ] && exit 0
+
+for project in "${projects[@]}"; do
+  cd "$project" || continue
+
+  workmux list --json | jq -c '.[] | select(.is_main | not)' | while IFS= read -r wt; do
+    handle=$(jq -r .handle <<<"$wt")
+    branch=$(jq -r .branch <<<"$wt")
+    path=$(jq -r .path <<<"$wt")
+
+    pr=$(gh pr list --head "$branch" --state merged --json number,headRefOid \
+      -q '.[0] | select(.) | "\(.number) \(.headRefOid)"' 2>/dev/null)
+    [ -z "$pr" ] && continue
+    read -r number head_oid <<<"$pr"
+
+    if [ "$(jq -r .has_uncommitted_changes <<<"$wt")" = true ]; then
+      log "skip $handle (PR #$number merged): uncommitted changes"
+      continue
+    fi
+    if jq -e '.agent_statuses | any(. == "working" or . == "waiting")' <<<"$wt" >/dev/null; then
+      log "skip $handle (PR #$number merged): agent busy"
+      continue
+    fi
+    if [ "$(git -C "$path" rev-parse HEAD)" != "$head_oid" ]; then
+      log "skip $handle (PR #$number merged): HEAD differs from merged PR head"
+      continue
+    fi
+
+    if $dry_run; then
+      log "would remove $handle (PR #$number merged)"
+    else
+      log "remove $handle (PR #$number merged)"
+      workmux rm -f "$handle" </dev/null
+    fi
+  done
+done

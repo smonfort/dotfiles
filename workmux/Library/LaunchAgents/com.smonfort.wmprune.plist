@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.smonfort.wmprune</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/smonfort/.local/bin/wmprune</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Users/smonfort/.local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+    <!-- Without a UTF-8 locale tmux mangles pane info and workmux fails. -->
+    <key>LANG</key>
+    <string>en_US.UTF-8</string>
+  </dict>
+  <key>StartInterval</key>
+  <integer>900</integer>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/Users/smonfort/Library/Logs/wmprune.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/smonfort/Library/Logs/wmprune.log</string>
+</dict>
+</plist>
