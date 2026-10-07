@@ -20,6 +20,7 @@ windows:
 
 # tokyonight (night) palette, matching nvim/.config/nvim/plugin/00-colorscheme.lua
 theme:
+  scheme: festival-circuit
   custom:
     current_row_bg: "#292e42"
     highlight_row_bg: "#3b4261"
