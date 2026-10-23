@@ -92,7 +92,6 @@ brew "starship"
 tap "shshemi/homebrew-tabiew", trusted: true
 brew "tabiew"
 brew "zsh-vi-mode"
-brew "gomplate"
 brew "uv"
 brew "imagemagick"
 brew "parallel"
