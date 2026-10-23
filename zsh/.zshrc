@@ -34,7 +34,7 @@ alias rsa="brew services restart sketchybar && killall AeroSpace && sleep 2 && o
 alias wm="workmux"
 
 # Ensure dependencies are up to date and remove unused ones
-bbic() {
+bb() {
   brew update
   local tmpfile
   tmpfile=$(mktemp)
