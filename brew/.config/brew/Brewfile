@@ -99,7 +99,6 @@ brew "zoxide"
 brew "sesh"
 
 # Office & Communication
-cask "slack"
 cask "obsidian"
 
 # IDE
